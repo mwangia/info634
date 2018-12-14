@@ -18,8 +18,9 @@ public class ProjectMain {
     public static final String DENIED = "Application Denied";
     public static final String DENIED_APP = "Application denied by financial institution";
     public static final String PRE_APPROVAL = "Preapproval request denied by financial institution";
+    public static final String CURRENT_DIR = System.getProperty("user.dir") +"/src/info634/";
     public static void main(String[] args) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader("/Users/mwangia/Documents/DrexelGrad/INFO634/hmda_philly.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(CURRENT_DIR + "hmda_philly.csv"))) {
             String line;
             boolean delete;
             int count = 0;
@@ -28,8 +29,9 @@ public class ProjectMain {
             Pattern deniedAppPattern = Pattern.compile('^' +DENIED_APP, Pattern.CASE_INSENSITIVE);
             Pattern preApprovalPattern = Pattern.compile('^' +PRE_APPROVAL, Pattern.CASE_INSENSITIVE);
 
-            BufferedWriter writer = new BufferedWriter(new FileWriter("/Users/mwangia/Documents/DrexelGrad/INFO634/hmda_philly_cleaned_classes.csv"));
-            BufferedWriter deletedWriter = new BufferedWriter(new FileWriter("/Users/mwangia/Documents/DrexelGrad/INFO634/hmda_philly_deleted_classes.csv"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(CURRENT_DIR + "hmda_philly_cleaned_classes.csv"));
+            //write deleted classes to file. compare to make sure all rows are accounted for between the 2 csv files.
+            BufferedWriter deletedWriter = new BufferedWriter(new FileWriter(CURRENT_DIR + "hmda_philly_deleted_classes.csv"));
             while((line = reader.readLine()) != null) {
                 delete = false;
                 count = count + 1;
